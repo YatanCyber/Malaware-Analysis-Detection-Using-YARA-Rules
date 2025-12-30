@@ -1,0 +1,22 @@
+Structure of Folder - "Malware-Detection-using-YARA-Rules" Should be like this:
+1.Malware-Detection-Using-Yara-Rules
+--app.py
+--Templates:
+  --Index.html
+  --result.html
+--Static:
+  --images:
+    --result-image.png
+    --cyber-upload.png
+    --malware-icon.png
+  --css:
+    --style.css
+  --js:
+    --main.js
+--yara_rules:
+  --easy:
+    --easy_rules.yar
+  --medium:
+    --medium_rules.yar
+  --hard:
+    --hard_rules.yar
