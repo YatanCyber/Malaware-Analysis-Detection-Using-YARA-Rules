@@ -1,0 +1,14 @@
+This is a harmless demo file created for testing YARA rules.
+
+The file contains several keywords used to simulate suspicious activity:
+
+malware
+virus
+trojan
+hacktool
+keylogger
+backdoor
+payload
+
+These terms are included ONLY for detection testing purposes.
+No harmful content is present.

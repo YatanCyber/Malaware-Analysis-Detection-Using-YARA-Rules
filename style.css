@@ -1,0 +1,106 @@
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#0ea5a4;
+  --accent-2:#2563eb;
+  --text:#0f1724;
+  --shadow: 0 8px 30px rgba(15,23,36,0.06);
+  --max-width:1100px;
+  --radius:12px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+.container{
+  width:95%;
+  max-width:var(--max-width);
+  margin:28px auto;
+}
+
+/* Topbar */
+.topbar{
+  padding:18px 0 6px;
+  border-bottom:1px solid rgba(15,23,36,0.04);
+  background:transparent;
+}
+.brand{margin:0;font-size:20px;font-weight:700}
+.subtitle{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+/* Layout */
+.layout{display:block; gap:18px}
+@media(min-width:900px){
+  .layout{display:block}
+}
+
+/* Cards & upload */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+
+.upload-card{display:flex;flex-direction:column;gap:12px}
+@media(min-width:900px){ .upload-card{flex-direction:row} }
+
+.upload-left{flex:1}
+.upload-right{width:320px}
+
+.file-drop{
+  display:block;
+  border:2px dashed rgba(15,23,36,0.06);
+  padding:18px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.file-drop input{display:none}
+.file-drop:hover{transform:translateY(-2px); box-shadow:0 6px 18px rgba(15,23,36,0.04)}
+.file-drop-content{display:flex;gap:12px;align-items:center}
+.file-drop-content svg{color:var(--accent-2);opacity:0.9}
+
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+.actions{margin-top:12px;display:flex;gap:8px;align-items:center}
+.btn{
+  padding:8px 12px;border-radius:8px;border:1px solid rgba(15,23,36,0.06);background:#fff;cursor:pointer;
+}
+.btn.primary{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;border:none;box-shadow:0 6px 18px rgba(14,165,164,0.12)}
+
+/* File info */
+.file-info{margin-top:12px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid rgba(15,23,36,0.03)}
+
+/* Progress */
+.progress-wrap{margin-top:14px}
+.progress{height:10px;background:#eef2ff;border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 350ms ease}
+
+/* Results */
+.results-grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:900px){ .results-grid{grid-template-columns:1fr 1fr} }
+
+.result-block{background:#fbfdff;padding:12px;border-radius:10px;border:1px solid rgba(15,23,36,0.03)}
+.result-content{min-height:120px;overflow:auto}
+
+/* YARA badges and match list */
+.yara-match{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:linear-gradient(180deg,#ffffff,#fbfcff);margin-bottom:8px;border:1px solid rgba(15,23,36,0.03)}
+.yara-badge{background:#fff;color:#0f1724;border-radius:6px;padding:6px 8px;font-weight:600;font-size:13px;box-shadow:0 4px 12px rgba(15,23,36,0.04)}
+
+/* Raw JSON */
+.raw-block{margin-top:12px;padding:12px;background:#0b1220;color:#e6edf3;border-radius:10px}
+.json-output{white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto;padding:12px;background:transparent;border-radius:6px;font-family:monospace;font-size:13px}
+
+/* Footer */
+.footer{padding:16px 0;text-align:center;color:var(--muted);font-size:13px}
+code{background:rgba(15,23,36,0.03);padding:2px 6px;border-radius:6px;font-size:13px}

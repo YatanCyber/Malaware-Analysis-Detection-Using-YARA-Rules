@@ -1,0 +1,3 @@
+This is a harmless demo file for YARA.
+MALWARE_TEST
+EASY_TRIGGER

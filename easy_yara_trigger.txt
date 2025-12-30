@@ -1,0 +1,14 @@
+This is a SAFE demo file created to trigger the EASY YARA RULE.
+
+The following keywords are intentionally included:
+malware
+virus
+trojan
+hacktool
+keylogger
+backdoor
+payload
+EASY_TRIGGER
+MALWARE_TEST
+
+This file is NOT malicious — it is only for level-wise YARA rule testing.

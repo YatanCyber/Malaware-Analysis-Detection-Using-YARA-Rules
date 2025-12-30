@@ -1,0 +1,4 @@
+This file contains medium complexity patterns.
+SUSPICIOUS_PAYLOAD
+MEDIUM_ALERT_SEQUENCE
+4D5A9000FFEEDDCCBBAA1234

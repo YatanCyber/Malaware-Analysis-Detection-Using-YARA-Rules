@@ -1,0 +1,15 @@
+This is a harmless demo file created to trigger the MEDIUM YARA rule.
+
+It contains encoded and obfuscated script indicators:
+
+powershell.exe -enc
+FromBase64String
+
+CreateObject("WScript.Shell")
+Execute("cmd.exe /c echo test")
+
+Simulated suspicious hex patterns (not real shellcode):
+
+è"3D
+
+This file is safe and meant for detection testing only.

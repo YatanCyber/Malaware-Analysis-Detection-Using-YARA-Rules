@@ -1,0 +1,4 @@
+# Demo clean file
+# This file is harmless and should not trigger the example YARA rule.
+Hello, this is a simple text file for testing.
+It contains normal English sentences and no suspicious keywords.

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Malware Scan Report</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: rgba(0,0,0,0.75) url('/static/images/result-image.png') no-repeat center center / cover;
+            background-blend-mode: darken;
+            color: #dffcff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 950px;
+            margin: 40px auto;
+            background: rgba(15, 20, 30, 0.80);
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #19e6ff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00eaff;
+        }
+
+        h2 {
+            color: #19e6ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px #0099cc;
+        }
+
+        h3 {
+            color: #7fe0ff;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        .section {
+            margin-top: 25px;
+            padding: 18px;
+            background: rgba(40, 60, 80, 0.20);
+            border-left: 5px solid #00eaff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+        }
+
+        ul { padding-left: 20px; }
+
+        .warning { color: #ff6666; font-weight: bold; }
+        .safe { color: #66ff99; font-weight: bold; }
+
+        .btn-back {
+            display: block;
+            width: 200px;
+            margin: 35px auto 10px auto;
+            padding: 12px;
+            background: #00eaff;
+            color: black;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #00eaff;
+        }
+
+        .btn-back:hover {
+            background: #0099cc;
+            box-shadow: 0 0 15px #0099cc;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Prevention Tips Box */
+        .prevention-box {
+            margin-top: 30px;
+            padding: 18px;
+            background: rgba(255, 60, 60, 0.15);
+            border-left: 5px solid #ff4444;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(255, 80, 80, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>🔍 Malware Scan Report</h1>
+
+        <h3 style="text-align:center;">File Scanned: {{ filename }}</h3>
+
+        <!-- FILE INFO -->
+        <div class="section">
+            <h2>📁 File Information</h2>
+            <p><strong>Name:</strong> {{ filename }}</p>
+            <p><strong>Type:</strong> {{ vt_results.meta.file_type }}</p>
+            <p><strong>Size:</strong> {{ vt_results.meta.size }} bytes</p>
+            <p><strong>SHA256:</strong> {{ vt_results.meta.sha256 }}</p>
+        </div>
+
+        <!-- YARA RESULTS -->
+        <div class="section">
+            <h2>🧬 YARA Scan Results</h2>
+
+            <h3>Easy Rules</h3>
+            {% if yara_results.easy %}
+                <ul>
+                    {% for match in yara_results.easy %}
+                    <li>{{ match }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No matches found.</p>
+            {% endif %}
+
+            <h3>Medium Rules</h3>
+            {% if yara_results.medium %}
+                <ul>
+                    {% for match in yara_results.medium %}
+                    <li>{{ match }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No matches found.</p>
+            {% endif %}
+
+            <h3>Hard Rules</h3>
+            {% if yara_results.hard %}
+                <ul>
+                    {% for match in yara_results.hard %}
+                    <li>{{ match }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No matches found.</p>
+            {% endif %}
+        </div>
+
+        <!-- VIRUSTOTAL SUMMARY -->
+        <div class="section">
+            <h2>☣ VirusTotal Summary</h2>
+
+            {% if vt_results.warning %}
+                <p class="warning">⚠ {{ vt_results.warning }}</p>
+            {% elif vt_results.error %}
+                <p class="warning">⚠ {{ vt_results.error }}</p>
+            {% else %}
+                <p><strong>Harmless:</strong> {{ vt_results.stats.harmless }}</p>
+                <p><strong>Suspicious:</strong> {{ vt_results.stats.suspicious }}</p>
+                <p><strong>Malicious:</strong> {{ vt_results.stats.malicious }}</p>
+
+                <h3>Engine Detections</h3>
+
+                {% if vt_results.engines %}
+                <ul>
+                    {% for engine, result in vt_results.engines.items() %}
+                        {% if result %}
+                        <li><strong>{{ engine }}:</strong> {{ result }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <p>No engine-level data available.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <!-- PREVENTION -->
+        <div class="prevention-box">
+            <h2>🛡 Prevention Tips</h2>
+            <ul>
+                <li>Enable real-time antivirus protection.</li>
+                <li>Never trust unknown email attachments.</li>
+                <li>Download software only from official sources.</li>
+                <li>Keep OS and firewall updated regularly.</li>
+                <li>Back up important data frequently.</li>
+                <li>Do not enable macros unless required.</li>
+                <li>Avoid double-extension executable files.</li>
+            </ul>
+        </div>
+
+        <a href="/" class="btn-back">⬅ Scan Another File</a>
+
+    </div>
+</body>
+</html>

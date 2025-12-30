@@ -1,0 +1,18 @@
+This is a harmless demo file created to trigger the HARD YARA rule.
+
+It includes simulated ransomware indicators:
+
+README_TO_DECRYPT.txt
+HOW_TO_RECOVER_FILES.html
+YOUR_FILES_ARE_ENCRYPTED
+
+Simulated ransomware API calls:
+CryptEncrypt
+CryptAcquireContext
+VirtualAlloc
+WriteFile
+
+Simulated XOR encryption sequence (not real malware):
+1À1Û1É1Ò
+
+This file is safe and for testing only.
